@@ -1,5 +1,5 @@
 ---
-# Productor
+# Productor y consumidores
 - hosts: productor, consumidor1, consumidor2
   become: yes
   become_user: root
