@@ -1,0 +1,94 @@
+---
+# Productor
+- hosts: productor, consumidor1, consumidor2
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: instalar pip version
+      command: "pip --version"
+      register: pip_version_output
+      ignore_errors: yes
+      changed_when: false
+    - name: descargar get-pip.py
+      vars:
+          pip_version_url: "{{ ('latest' == 'latest') | ternary('', 'latest') }}"
+          required_vars:
+          - "latest"
+      get_url:
+          url: 'https://bootstrap.pypa.io/{{ pip_version_url }}/get-pip.py'
+          dest: /tmp/get-pip.py
+      when: (pip_version_output is failed) or not pip_version_output.stdout is search("9.0.*")
+    - name: instalar pip
+      command: "{{ ansible_python_interpreter if ansible_python_interpreter is defined else 'python' }} get-pip.py pip=={{ '9.0.*' }}"
+      when: "(pip_version_output is failed) or not pip_version_output.stdout is search('pip ' + '9.0.*')"
+      args:
+        chdir: /tmp
+    - pip:
+        name: pika
+
+
+# RabbitMQ broker
+- hosts: broker
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Descargar esl-erlang
+      get_url:
+        url: https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
+        dest: /home/vagrant/esl-erlang_21.0-1~debian~stretch_amd64.deb
+        mode: 0755
+    - name: instalar esl-erlang
+      apt:
+        deb: /home/vagrant/esl-erlang_21.0-1~debian~stretch_amd64.deb
+    - name: agregar un Apt signing key
+      apt_key:
+        url: https://packages.erlang-solutions.com/debian/erlang_solutions.asc
+        state: present
+    - name: arreglar dependencias
+      shell: apt-get -f install
+    - name: Instalar la llave pública de RabbitMQ
+      apt_key:
+        url: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+        state: present
+    - name: Agregar repositorio oficial de RabbitMQ
+      apt_repository:
+        repo: deb https://dl.bintray.com/rabbitmq/debian bionic main
+        state: present
+        filename: rabbitmq
+    - name: instalar rabbitmq
+      apt:
+        name: rabbitmq-server
+        install_recommends: yes
+        state: present
+    - name: Agregar usuario productor
+      rabbitmq_user:
+        user: productor
+        password: password
+        permissions:
+          - vhost: /
+            configure_priv: .*
+            read_priv: .*
+            write_priv: .*
+        state: present
+    - name: Agregar usuario consumidor1
+      rabbitmq_user:
+        user: consumidor1
+        password: password
+        permissions:
+          - vhost: /
+            configure_priv: .*
+            read_priv: .*
+            write_priv: .*
+        state: present
+    - name: Agregar usuario consumidor2
+      rabbitmq_user:
+        user: consumidor2
+        password: password
+        permissions:
+          - vhost: /
+            configure_priv: .*
+            read_priv: .*
+            write_priv: .*
+        state: present
