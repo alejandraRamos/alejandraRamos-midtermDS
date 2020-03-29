@@ -26,6 +26,20 @@ El funcionamiento del productor y los consumidores se basó en el desarrollo de 
 
 Por ello, el productor y los consumidores solo necesitaron aprovisonarse con Pip y pika, donde **pip** es un sistema de gestión de paquetes que es usado para instalar y administrar lo que python necesite y **pika** es una librería que tiene extenciones de RabbitMQ que permite el envío de mensajes.
 
-En la siguiente figura se muestra como se realizó el aprovisionamiento de estas tres másquinas:
+En la siguiente figura se muestra como se realizó el aprovisionamiento de estas tres máquinas:
 
 ![image](https://drive.google.com/uc?export=view&id=1AdMsVMIwrXWi3ZhlmA_JyOTWUo08PfqC)
+
+Todo ese aprovisionamiento se realiza con el fin de poder hacer uso de los siguiente códigos:
+
+***Código para el productor***
+
+![image](https://drive.google.com/uc?export=view&id=1kPu1tQpx6cebSaVdUJaBYR5r6tCz8Ylm)
+
+***Código para el consumidor1***
+
+![image](https://drive.google.com/uc?export=view&id=1fvc3G0p5NdmNpwVpKaMHlXfZ5pO-IGME)
+
+***Código para el consumidor2***
+
+![image](https://drive.google.com/uc?export=view&id=1GcJUpRm6aOw5ZE66ONqBF6yR7lWOSHZ4)

@@ -2,7 +2,7 @@
 import pika
 import sys
 
-credentials = pika.PlainCredentials("consumidor1", "password")
+credentials = pika.PlainCredentials("consumidor2", "password")
 connection = pika.BlockingConnection(
     pika.ConnectionParameters('192.168.56.3',  5672,'/', credentials))
 channel = connection.channel()
