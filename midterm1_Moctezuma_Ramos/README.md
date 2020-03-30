@@ -1,7 +1,7 @@
 # Primer Parcial
 
 - Alejandra Ramos Vélez - A00310480
-- Juan Camilo Moctezuma - A00
+- Juan Camilo Moctezuma - A00024104
 
 El objetivo de esta activida es crear un ambiente donde sea posible transmitir mensajes desde un host a disfrentes hosts, dependiendo de la instrucción.
 
@@ -81,3 +81,5 @@ En la siguente figura se puede ver un ejemplo del programa en ejecución.
 ![image](https://drive.google.com/uc?export=view&id=1-ETUrKHZ0EvDshrdZvQqCfZiuR5HQItV)
 
 # Conclusiones
+
+para comenzar uno de los primeros objetivos a superar era la curva de aprendizaje tanto en el lenguaje de programacion como las herramientas para desarrollar este parcial. en primer lugar, la herramienta  RabbitMQ es una herramienta la cual presentaba una curva de aprendizaje elevada. Sin embargo, debido a la buena documentacion de la misma, los objetivos a desarrollar con esta herramienta se lograron sin inconvenientes. Con respecto al lenguaje de programacion python tambien presento una curva de aprendizaje debido la falta de conocimeinto del mismo, razon por la cual se busco documentacion y tutoriales para los problemas que se nos presentaban. Con respecto a Ansible y Vagrant consideramos que fueron herramientas de aprovisionamiento y despliegue adecuadas para el objetivo. Consideramos que una forma de mejorar lo presentado en el parcial seria el uso de herramientas como contenedores debido a la reduccion de costos en general y a su modularidad, sin embargo, debido a ciertas limitaciones se implemento con cuatro maquinas virtuales las cuales logran el objetivo deseado
