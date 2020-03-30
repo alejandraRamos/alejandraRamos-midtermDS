@@ -1,4 +1,4 @@
-## Primer Parcial
+# Primer Parcial
 
 - Alejandra Ramos Vélez - A00310480
 - Juan Camilo Moctezuma - A00
@@ -20,7 +20,7 @@ En la siguente figura se muestran la caracteristicas con las que fueron creadas 
 
 La forma de aprovisonar cada máquina fue la siguiente:
 
-### **Productor y consumidores**
+# **Productor y consumidores**
 
 El funcionamiento del productor y los consumidores se basó en el desarrollo de un programa en python para cada caso, siguiendo la guia presentada por el profesor del curso https://www.rabbitmq.com/tutorials/tutorial-four-python.html , por lo tanto, era necesario obtener las librerias y gestores necesarios por python para realizar el aprovisionaminto de las mpaquinas de forma correcta.
 
@@ -58,3 +58,26 @@ El productor enviará una instrucción por el canal creado, si es _Grupo01_ ser�
 
 Tanto para consumidor1 como para consumidor2, el programa funciona de la misma forma. Ambos están escuchando algún mensaje que les pueda llegar por parte del productor, dependiendo de la cola que provenga.
 
+# **Broker**
+
+El funcionamiento del broker se basó en el uso de pika como medio para menejar los mensajes provenientes del productor con destino a los consumidores.
+
+Por ello, fue necesario approvisionar la máquina del broker, con erlang y rabbitMQ para soportar el trabajo que iba a realizar pika, de la siguiente manera:
+
+![image](https://drive.google.com/uc?export=view&id=1xWvtDjT7Jjv0uvr9dmFvyNkn_aNC7CrP)
+
+Ahora bien, luego de asegurarnos de que cada máquina tuviese lo necesario para crearse y aprovisionarse de forma correcta, pasamos a correr el comando ***sudo vagrant up*** el cual permite como fue mencionado anteriormente que las máquinas se creen y se aprovisionen de la forma como fue indicado en los archivos _Vagrantfile_ y _servers.yml_.
+
+Despues de que este proceso se realiza de forma correcta, pasamos a verificar el estado de las máquinas
+
+![image](https://drive.google.com/uc?export=view&id=1vy-9gyMK_yqyCQcTHmMO3dO6eDX_EnXF)
+
+Como se puede ver en la figura anterior, con el comando ***sudo vagrant status*** es posible verificar el estado de todas las máquinas. Como se evidencia en la figura todas están en el estado de _running_.
+
+Por último, pasamos a verificar el correcto funcionamiento de la actividad. Primero, nos conectamos por ssh con el productor, el consumidor1 y el consumidor2; luego, accedemos a la carperta donde se archivaron los códigos del programa de productor, consumidor1 y consumidor2 con el comando ***cd /vagrant/codigos*** y preparamos cada consumidor para que se quede escuchando con el comando ***python consumidor1.py*** y ***python consumidor2.py***. Para finalizar, entramos al porductor y ejecutamos el comando ***python productor.py _NombreDeLaCola_ _mensaje_***.
+
+En la siguente figura se puede ver un ejemplo del programa en ejecución.
+
+![image](https://drive.google.com/uc?export=view&id=1-ETUrKHZ0EvDshrdZvQqCfZiuR5HQItV)
+
+# Conclusiones
