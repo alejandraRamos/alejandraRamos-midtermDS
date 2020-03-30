@@ -30,11 +30,23 @@ En la siguiente figura se muestra como se realizó el aprovisionamiento de estas
 
 ![image](https://drive.google.com/uc?export=view&id=1AdMsVMIwrXWi3ZhlmA_JyOTWUo08PfqC)
 
+Es necesario aclarar que existiran 3 colas para el envío de los mensajes por parte del productor:
+
+- General, la cual envia los mensajes tanto a consumidor1 como a consumidor2
+- Grupo01, la cual envia mensajes solo al consumidor1
+- Grupo02, la cual envia mensajes solo al consumidor2
+
 Todo ese aprovisionamiento se realiza con el fin de poder hacer uso de los siguiente códigos:
 
 ***Código para el productor***
 
 ![image](https://drive.google.com/uc?export=view&id=1kPu1tQpx6cebSaVdUJaBYR5r6tCz8Ylm)
+
+En el código del productor se importa la librería pika, la cual nos va a permitir realizar el envio de mesajes.
+
+Consideramos necesario tener credenciales para el productor y que de esta forma el broker reconozca de donde proviene la información que está recibiendo.
+
+El productor enviará una instrucción por el canal creado, si es _Grupo01_ será dirigido a la cola de mensajes del consumidor1, si es _Grupo02_ será dirigido a la cola de mensajes del consumidor2, en caso de que no se envíe ninguna instrucción, se asume que se hará uso de la cola de _General_.
 
 ***Código para el consumidor1***
 
@@ -43,3 +55,6 @@ Todo ese aprovisionamiento se realiza con el fin de poder hacer uso de los sigui
 ***Código para el consumidor2***
 
 ![image](https://drive.google.com/uc?export=view&id=1GcJUpRm6aOw5ZE66ONqBF6yR7lWOSHZ4)
+
+Tanto para consumidor1 como para consumidor2, el programa funciona de la misma forma. Ambos están escuchando algún mensaje que les pueda llegar por parte del productor, dependiendo de la cola que provenga.
+
